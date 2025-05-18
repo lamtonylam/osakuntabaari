@@ -6,10 +6,12 @@ def __get_menu():
     url = 'https://hys.net/osakuntabaari/ruokalista/'
     res = requests.get(url)
     soup = BeautifulSoup(res.content, 'html.parser')
+    # Div lunch contains all menus
     todays_list = soup.find("div", {"class": "lunch"})
     return todays_list
 
 def get_weeks_menu():
+    # find all dates
     weeks_list = __get_menu().find_all("div", {"class": "row"})
     menu_dict = {}
     for day in weeks_list:

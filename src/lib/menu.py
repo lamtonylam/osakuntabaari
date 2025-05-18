@@ -13,14 +13,15 @@ def create_menu_calendar(menu):
         
         # Create a new event
         event = Event()
+        # Event name is the food of the day
         event.name = food
+        # Event date
         event.begin = datetime_object.date()  # Set as all-day event
         event.make_all_day()
+        # Event description
         event.description = f"{date} \n{food}"
         
         # Add the event to the calendar
         calendar.events.add(event)
-        
-        print(f"Added event: {date} - {food}")
-    
+
     return calendar
