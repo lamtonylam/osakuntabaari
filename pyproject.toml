@@ -1,0 +1,13 @@
+[project]
+name = "osakuntabaari"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "requests>=2.32.3",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "ics>=0.7.2",
+]
