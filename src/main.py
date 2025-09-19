@@ -1,5 +1,5 @@
 from lib.hamis_data import get_weeks_menu
-from lib.menu import create_menu_calendar
+from lib.menu import create_menu_calendar, create_menu_calendar_timed
 from datetime import datetime
 from ics import Calendar, Event
 import os
@@ -30,6 +30,26 @@ async def get_calendar():
         }
     )
 
+@app.get("/calendar_timed.ics", response_class=Response)
+async def get_calendar_timed():
+    """
+    Endpoint that serves the menu calendar with menus as timed events as an ICS file.
+    """
+    menu = get_weeks_menu()
+    calendar = create_menu_calendar_timed(menu)
+    
+    calendar_content = str(calendar)
+    
+    print(f"{datetime.now()}: Timed calendar served")
+    
+    return Response(
+        content=calendar_content,
+        media_type="text/calendar",
+        headers={
+            "Content-Disposition": "attachment; filename=osakuntabaari_menu_timed.ics"
+        }
+    )
+
 @app.get("/")
 async def root():
     """
@@ -38,7 +58,8 @@ async def root():
     return {
         "message": "Osakuntabaari Menu Calendar API", 
         "endpoints": {
-            "calendar": "/calendar.ics"
+            "calendar": "/calendar.ics",
+            "calendar_timed": "/calendar_timed.ics"
         }
     }
 
@@ -49,4 +70,4 @@ if __name__ == "__main__":
     print(f"Calendar available at http://localhost:{port}/calendar.ics")
     print("Press Ctrl+C to stop the server")
     
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run("__main__:app", host="0.0.0.0", port=port, reload=True)
