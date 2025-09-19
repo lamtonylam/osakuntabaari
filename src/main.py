@@ -18,7 +18,7 @@ async def get_calendar():
     menu = get_weeks_menu()
     calendar = create_menu_calendar(menu)
     
-    calendar_content = str(calendar)
+    calendar_content = calendar.serialize()
     
     print(f"{datetime.now()}: Calendar served")
     
@@ -38,7 +38,7 @@ async def get_calendar_timed():
     menu = get_weeks_menu()
     calendar = create_menu_calendar_timed(menu)
     
-    calendar_content = str(calendar)
+    calendar_content = calendar.serialize()
     
     print(f"{datetime.now()}: Timed calendar served")
     
