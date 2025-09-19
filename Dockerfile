@@ -8,6 +8,7 @@ ADD . /app
 WORKDIR /app
 RUN uv sync --locked
 
+EXPOSE 5000
+
 CMD ["uv", "run", "src/main.py"]
 # Expose the port the app runs on
-EXPOSE 5000
