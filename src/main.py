@@ -1,5 +1,5 @@
-from .lib.hamis_data import get_weeks_menu
-from .lib.menu import create_menu_calendar, create_menu_calendar_timed
+from lib.hamis_data import get_weeks_menu
+from lib.menu import create_menu_calendar, create_menu_calendar_timed
 from datetime import datetime
 from ics import Calendar, Event
 import os
