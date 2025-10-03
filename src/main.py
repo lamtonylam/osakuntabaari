@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from lib.hamis_data import get_weeks_menu
 from lib.menu import create_menu_calendar, create_menu_calendar_timed
 from datetime import datetime
