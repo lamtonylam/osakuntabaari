@@ -11,5 +11,4 @@ dependencies = [
     "uvicorn>=0.29.0",
     "ics>=0.7.2",
     "pytz>=2025.2",
-    "cowsay>=6.1",
 ]
