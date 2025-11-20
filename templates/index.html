@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>{{ title | default("Osakuntabaari Menu Calendar") }}</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body class="bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">Osakuntabaari</a>
+            </div>
+        </nav>
+
+        <main class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <h1 class="display-6 mb-3">Osakuntabaari Menu Calendar</h1>
+                    <p class="lead text-muted">
+                        Download the weekly menu as an iCalendar (.ics) file.
+                        Subscribe it to your calendar app to see the menus as
+                        events.
+                    </p>
+
+                    <script>
+                        function copyToClipboard(text, button) {
+                            navigator.clipboard
+                                .writeText(text)
+                                .then(() => {
+                                    button.textContent = "Copied!";
+                                    setTimeout(() => {
+                                        button.textContent = "Copy";
+                                    }, 2000);
+                                })
+                                .catch((err) =>
+                                    console.error("Error copying text:", err)
+                                );
+                        }
+                    </script>
+
+                    <div class="mb-2">
+                        <label class="form-label small mb-1"
+                            >Calendar (.ics)</label
+                        >
+                        <div class="input-group">
+                            <input
+                                id="calLink"
+                                type="text"
+                                class="form-control"
+                                readonly
+                                value="{{ path_for_calendar }}"
+                            />
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label small mb-1"
+                            >Timed Calendar (.ics)</label
+                        >
+                        <div class="input-group">
+                            <input
+                                id="timedLink"
+                                type="text"
+                                class="form-control"
+                                readonly
+                                value="{{ path_for_calendar_timed}}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title">How to use</h5>
+                        <ol class="mb-0">
+                            <li>
+                                Copy one of the links depending on if you want
+                                whole day calendar event of one timed at 11.00.
+                            </li>
+                            <li>
+                                Input the url to subscribe it in
+                                <a
+                                    href="https://support.google.com/calendar/answer/37100?hl=en&co=GENIE.Platform%3DDesktop#:~:text=Use%20a%20link%20to%20add%20a%20public%20calendar"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    >Google Calendar</a
+                                >,
+                                <a
+                                    href="https://support.microsoft.com/en-us/office/import-calendars-into-outlook-8e8364e1-400e-4c0f-a573-fe76b5a2d379#:~:text=Open%20your%20Outlook%20calendar%2C%20and%20on%20the%20Home%20tab%2C%20select%20Add%20Calendar%C2%A0%3E%20From%20Internet."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    >Outlook</a
+                                >, or
+                                <a
+                                    href="https://support.apple.com/en-us/102301"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    >Apple Calendar</a
+                                >.
+                            </li>
+                            <li>
+                                Events will show the food available at
+                                Osakuntabaari.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

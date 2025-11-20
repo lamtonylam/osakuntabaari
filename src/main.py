@@ -9,10 +9,28 @@ from ics import Calendar, Event
 import os
 import sys
 import uvicorn
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Request, Response
+from fastapi.templating import Jinja2Templates
 
 # Create FastAPI app
 app = FastAPI(title="Osakuntabaari Menu Calendar API")
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/")
+async def root(request: Request):
+    """
+    API info endpoint
+    """
+    
+    whole_path = str(request.url)
+    
+    path_for_calendar = whole_path.rstrip("/") + "/calendar.ics"
+    path_for_calendar_timed = whole_path.rstrip("/") + "/calendar_timed.ics"
+    
+    return templates.TemplateResponse( request=request,
+        name="index.html", context={"path_for_calendar": path_for_calendar, "path_for_calendar_timed": path_for_calendar_timed}
+    )
 
 @app.get("/calendar.ics", response_class=Response)
 async def get_calendar():
@@ -54,21 +72,9 @@ async def get_calendar_timed():
         }
     )
 
-@app.get("/")
-async def root():
-    """
-    API info endpoint
-    """
-    return {
-        "message": "Osakuntabaari Menu Calendar API", 
-        "endpoints": {
-            "calendar": "/calendar.ics",
-            "calendar_timed": "/calendar_timed.ics"
-        }
-    }
 
 if __name__ == "__main__":
-    port = 5000
+    port = 8000
     
     print(f"Server starting at http://localhost:{port}")
     print(f"Calendar available at http://localhost:{port}/calendar.ics")
