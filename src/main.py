@@ -74,10 +74,20 @@ async def get_calendar_timed():
 
 
 if __name__ == "__main__":
-    port = 8000
-    
+    # PORT/HOST env lets hosts (Coolify, Fly, Render, …) dictate binding.
+    # Default is loopback; the Dockerfile passes --host 0.0.0.0 so the
+    # container port stays reachable. Never hardcode a wildcard bind here.
+    host = os.getenv("HOST", "127.0.0.1")
+    try:
+        port = int(os.getenv("PORT", "8000"))
+    except (TypeError, ValueError):
+        port = 8000
+
     print(f"Server starting at http://localhost:{port}")
     print(f"Calendar available at http://localhost:{port}/calendar.ics")
     print("Press Ctrl+C to stop the server")
-    
-    uvicorn.run("__main__:app", host="0.0.0.0", port=port, reload=True)
+
+    # NOTE: reload=True is intentionally OFF — the reloader spawns a file
+    # watcher + second process (2x memory, constant CPU wakeups). Only
+    # enable it locally via `--reload` when developing.
+    uvicorn.run("__main__:app", host=host, port=port)

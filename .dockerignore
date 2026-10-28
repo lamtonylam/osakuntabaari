@@ -1,0 +1,17 @@
+# Keep the build context lean: every byte here is sent to the
+# Docker daemon and can bust layer caching on rebuilds.
+.git
+.github
+.venv
+__pycache__/
+*.py[cod]
+*.ics
+.DS_Store
+uv.lock.bak
+.dockerignore
+Dockerfile*
+README.md
+requirements.txt
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

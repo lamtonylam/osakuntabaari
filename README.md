@@ -33,5 +33,5 @@ docker build . -t osakuntabaari
 2. Run docker image
 
 ```
-docker run -p 5000:5000 osakuntabaari
+docker run -p 8000:8000 osakuntabaari
 ```
